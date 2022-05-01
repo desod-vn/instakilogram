@@ -7,12 +7,11 @@
         protected $action = 'index';
         protected $params = [];
 
-
         public function __construct()
         {
             $routers = $this->router();
 
-            if (isset($routers[0]) && file_exists(self::CONTROLLER_FOLDER_NAME . "/" . $routers[0] ."Controller.php")) {
+            if (isset($routers) && file_exists(self::CONTROLLER_FOLDER_NAME . "/" . $routers[0] ."Controller.php")) {
                 $this->controller = ucfirst($routers[0]);
                 unset($routers[0]);
             }
@@ -36,11 +35,10 @@
             call_user_func_array([$this->controller, $this->action], $this->params);
         }
 
-        function router()
+        public function router()
         {
             if (isset($_GET["page"])) {
                 $router = explode("/", filter_var(trim(strtolower($_GET["page"]))));
-
                 return $router;
             }
         }
