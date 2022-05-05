@@ -3,10 +3,11 @@
     {
         public function connect()
         {
-            $link = mysqli_connect("database", "root", $_ENV['MYSQL_ROOT_PASSWORD'], null);
+            $link = mysqli_connect("database", "root", $_ENV['MYSQL_ROOT_PASSWORD'], $_ENV['MYSQL_DATABASE']);
 
-            if(mysqli_connect_errno() === 0)
+            if(mysqli_connect_errno() === 0) {
                 return $link;
+            }
             
             return false;
         }

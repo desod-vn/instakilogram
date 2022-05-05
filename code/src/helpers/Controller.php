@@ -34,9 +34,12 @@
                 ]);
             } else {
                 $uploadSource = 'src/uploads/' . $targetDir . '/';
+                if (!file_exists($uploadSource)) {
+                    mkdir($uploadSource, 0777, true);
+                }
                 $targetFile = $uploadSource . basename($image[$data]["name"]);
                 $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-                if ($image[$data]["size"] > 5000) {
+                if ($image[$data]["size"] > 500000) {
                     return $this->view($viewPage, [
                         'message' => 'Ảnh quá kích thước, vui lòng chọn ảnh < 5MB'
                     ]);
@@ -58,6 +61,11 @@
                     ]);
                 }
             }
+        }
+
+        public function backHome($path = '') {
+            header('Location: /home/' . $path);
+            die();
         }
 
         public function model($name)

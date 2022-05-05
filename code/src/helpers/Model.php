@@ -11,14 +11,14 @@
             return mysqli_query($this->connect(), $sql);
         }
 
-        public function all($table, $column = ['*'], $orderBy = 'asc', $limit = '')
+        public function all($table, $column = ['*'], $orderBy = 'asc', $limit = '', $whereRaw = '')
         {
             $column = implode(',', $column);
 
             if($limit != 0)
-                $sql = "SELECT ${column} FROM ${table} ORDER BY id ${orderBy} LIMIT ${limit}";
+                $sql = "SELECT ${column} FROM ${table}". (isset($whereRaw) ? " WHERE ${whereRaw} " : " ") . "ORDER BY id ${orderBy} LIMIT ${limit}";
             else
-                $sql = "SELECT ${column} FROM ${table} ORDER BY id ${orderBy}";
+                $sql = "SELECT ${column} FROM ${table}}". (isset($whereRaw) ? " WHERE ${whereRaw} " : " ") . "ORDER BY id ${orderBy}";
 
             $data = [];
             

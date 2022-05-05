@@ -1,8 +1,8 @@
 <?php 
 
-    class UserModel extends Model implements ModelInterface
+    class PostModel extends Model implements ModelInterface
     {
-        protected $table = 'user';
+        protected $table = 'post';
 
         protected $select = [
             '*',
@@ -11,6 +11,11 @@
         public function getAll($orderBy = "ASC", $limit = 0)
         {
             return $this->all($this->table, $this->select, $orderBy, $limit);
+        }
+
+        public function getAllWhere($orderBy = "ASC", $limit = 0, $where = '')
+        {
+            return $this->all($this->table, $this->select, $orderBy, $limit, $where);
         }
 
         public function getOne($id = 0)
