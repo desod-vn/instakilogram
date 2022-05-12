@@ -87,7 +87,7 @@
             fclose($accounts);
 
             $user = explode(';', $account);
-            return isset($user[1]) ? ($user[1] . ' ' . $user[2]) : null;
+            return isset($user[1]) ? (str_replace('lastname=', '', $user[1]) . ' ' . str_replace('firstname=', '', $user[2])) : null;
         }
 
         public function model($name)

@@ -206,19 +206,7 @@
 
         public function find($id)
         {
-            $account = '';
-            $accounts = fopen('account.db', 'r') or die('Unable to open file!');
-            while(!feof($accounts)) {
-                $record = fgets($accounts);
-                if (str_contains($record, 'email=' . $id . ';')) {
-                    $account = $record;
-                    break;
-                }
-            }            
-            fclose($accounts);
-
-            $user = explode(';', $account);
-            return $user[1] . ' ' . $user[2];
+            
         }
 
         public function delete($id)

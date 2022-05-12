@@ -49,7 +49,7 @@ function showModal(e) {
     modalImg.src = img.src;
     captionText.innerHTML = img.alt;
     user.innerHTML = 'Posted: ' + img.getAttribute('data-time');
-    user.innerHTML += '- By: ' + img.getAttribute('data-user');
+    user.innerHTML += '- By: ' + img.getAttribute('data-email');
 
 }
 
