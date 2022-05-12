@@ -33,7 +33,7 @@
                     return $this->backAdmin();
                 } else {
                     return $this->view('admin.login', [
-                        'error' => 'Không thể truy cập'
+                        'error' => 'Cannot access. Please try again.'
                     ]);
                 }
             } else {
@@ -58,13 +58,13 @@
             ];
         }
 
-        public function find($id)
+        public function update($id)
         {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}/", $_POST['password'])) {
                     return $this->view('admin.reset', [
                         'email' => $id,
-                        'error' => 'Mật khẩu không hợp lệ, mất khẩu từ 8 đến 20 ký tự chứa ít nhất 1 chữ hoa, 1 chữ thường và 1 ký tự'
+                        'error' => 'Invalid password, password between 8 and 20 characters. Password contains at least 1 uppercase letter, 1 lowercase letter and 1 character'
                     ]);
                 } else {
                     $result = '';
@@ -88,7 +88,7 @@
                     
                     return $this->view('admin.reset', [
                         'email' => $id,
-                        'message' => 'Đổi mật khẩu thành công'
+                        'message' => 'Change password success'
                     ]);
                 }
             } else {
@@ -103,9 +103,23 @@
 
         }
 
-        public function update($id)
+        public function find($id)
         {
-            
+            $result = '';
+            $accounts = fopen('account.db', 'r') or die('Unable to open file!');
+            while(!feof($accounts)) {
+                $record = fgets($accounts);
+                if (str_contains($record, 'email=' . $id . ';')) {
+                    continue;
+                }
+                $result .= $record;
+            }
+            fclose($accounts);
+            $accounts = fopen('account.db', 'w+') or die('Unable to open file!');
+            fwrite($accounts, $result . "\n");
+            fclose($accounts);
+
+            return $this->backAdmin();
         }
 
         public function delete($id)

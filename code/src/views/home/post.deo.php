@@ -20,7 +20,7 @@
                 <div class="form-input my-4">
                     <label for="image" class="mb-2">Choose image</label>
                     <br />
-                    <input type="file" name="image" class="form-control-file" id="image" accept="image/*">
+                    <input type="file" name="image" class="form-control-file" id="image" accept="image/*" required>
                 </div>
                 <label for="level" class="mb-2">Share level</label>
                 <select class="form-select" name="level" id="level" aria-label="">
@@ -29,7 +29,7 @@
                     <option value="private">Private</option>
                 </select>
                 <div class="d-grid gap-2">
-                    <input type="submit" class="btn btn-primary mt-4 signup" value="Upload" />
+                    <input type="submit" id="submit" class="btn btn-primary mt-4 signup" value="Upload" />
                 </div>
             </div>
         </form>

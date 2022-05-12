@@ -2,8 +2,7 @@
 <nav class="navbar fixed-bottom navbar-light bg-light mt-5" style="background-color: rgba(0, 0, 0, 0.05);">
     <div class="container" style="padding: 0 10%;">
         <div>
-            <a href="#" class="text-decoration-none">Về chúng tôi</a>
-            <a href="#" class="text-decoration-none">Điều khoản sử dụng</a>
+            <a href="#" class="text-decoration-none">About us</a>
         </div>
         <div>
             © 2022 Copyright:

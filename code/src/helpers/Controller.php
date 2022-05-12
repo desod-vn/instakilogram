@@ -30,7 +30,7 @@
         {
             if ($image[$data]['error']) {
                 return $this->view($viewPage, [
-                    'message' => 'Vui lòng chọn ảnh'
+                    'message' => 'Please choose an image'
                 ]);
             } else {
                 $uploadSource = 'src/uploads/' . $targetDir . '/';
@@ -41,12 +41,12 @@
                 $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
                 if ($image[$data]["size"] > 500000) {
                     return $this->view($viewPage, [
-                        'message' => 'Ảnh quá kích thước, vui lòng chọn ảnh < 5MB'
+                        'message' => 'Image is too big, please choose <5MB'
                     ]);
                 }
                 if (!in_array($imageFileType, ['jpg', 'png', 'jpeg'])) {
                     return $this->view($viewPage, [
-                        'message' => 'Ảnh không đúng định dạng, vui lòng kiểm tra lại'
+                        'message' => 'The image is not in the correct format, please check again'
                     ]);
                 }
                 while (file_exists($targetFile)) {
@@ -57,7 +57,7 @@
                     return $targetFile;
                 } else {
                     return $this->view($viewPage, [
-                        'message' => 'Có lỗi xảy ra, vui lòng kiểm tra lại'
+                        'message' => 'An error occurred, please check again'
                     ]);
                 }
             }
@@ -71,6 +71,23 @@
         public function backAdmin($path = '') {
             header('Location: /admin/' . $path);
             die();
+        }
+
+        public function findUser($id)
+        {
+            $account = '';
+            $accounts = fopen('account.db', 'r') or die('Unable to open file!');
+            while(!feof($accounts)) {
+                $record = fgets($accounts);
+                if (str_contains($record, 'email=' . $id . ';')) {
+                    $account = $record;
+                    break;
+                }
+            }            
+            fclose($accounts);
+
+            $user = explode(';', $account);
+            return isset($user[1]) ? ($user[1] . ' ' . $user[2]) : null;
         }
 
         public function model($name)

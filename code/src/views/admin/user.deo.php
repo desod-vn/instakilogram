@@ -6,6 +6,7 @@
             <th scope="col">Firstname</th>
             <th scope="col">Lastname</th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +21,8 @@
                     echo '<td>' . str_replace('email=', '', $user[0]) . '</td>';
                     echo '<td>' . str_replace('lastname=', '', $user[1]) . '</td>';
                     echo '<td>' . str_replace('firstname=', '', $user[2]) . '</td>';
-                    echo '<td><a href="/admin/find/' . str_replace('email=', '', $user[0]) . '">Đổi mật khẩu</a></td>';
+                    echo '<td><a href="/admin/update/' . str_replace('email=', '', $user[0]) . '">Change password</a></td>';
+                    echo '<td><a href="/admin/find/' . str_replace('email=', '', $user[0]) . '">Delete</a></td>';
                     echo '</tr>';
                 }
             }

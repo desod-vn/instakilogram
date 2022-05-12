@@ -101,7 +101,7 @@
     max-width: 700px;
 }
   
-#caption {
+#caption, #user {
     margin: auto;
     display: block;
     width: 80%;

@@ -21,7 +21,7 @@
                     <div class="form-input my-4">
                         <label for="avatar" class="mb-2">Choose avatar</label>
                         <br />
-                        <input type="file" name="avatar" class="form-control-file" id="avatar" accept="image/*">
+                        <input type="file" name="avatar" class="form-control-file" id="avatar" accept="image/*" required>
                     </div>
                     <div class="d-grid gap-2">
                         <input type="submit" class="btn btn-primary mt-4 signup" value="Change Avatar" />

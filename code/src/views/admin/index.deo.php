@@ -13,7 +13,7 @@
             echo '<div class="alert alert-danger">' . $error . '</div>';
         }
     ?>
-    <h1 class="text-center mb-5">Quản lý danh sách user</h1>
+    <h1 class="text-center mb-5">Manage Users</h1>
     <?php $this->view('admin/user', [
         'users' => $users
     ]); ?>

@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<nav class="navbar border-bottom border-2 navbar-expand-lg navbar-light bg-light">
+<nav class="navbar fixed-top border-bottom border-2 navbar-expand-lg navbar-light bg-light">
   <div class="container" style="padding: 0 10%;">
     <a class="navbar-brand" href="/">
         <img src="../../assets/images/logo.png" alt="logo" />

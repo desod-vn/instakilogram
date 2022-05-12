@@ -61,10 +61,10 @@
                 }
                 fclose($accounts);
                 return $this->view('auth.login', [
-                    'error' => 'Thông tin địa chỉ email hoặc mật khẩu không chính xác'
+                    'error' => 'Email or password wrong. Please try again.'
                 ]);
             } else {
-                return $this->view('auth.login', []);
+                return $this->view('auth.login');
             }
         }
 
@@ -81,9 +81,9 @@
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $storeImageName = $this->storeImage($_FILES, 'avatar', 'avatars', 'auth.user');
                 if (is_string($storeImageName)) {
-                    $this->find($storeImageName);
+                    $this->update($storeImageName);
                     return $this->view('auth.user', [
-                        'message' => 'Thay đổi ảnh đại diện thành công'
+                        'message' => 'Change avatar success'
                     ]);
                 }
             } else {
@@ -115,7 +115,7 @@
                         $isEmailExist = true;
                         unlink($avatar);
                         return $this->view('auth.register', [
-                            'error' => 'Địa chỉ email này đã được đăng ký tài khoản'
+                            'error' => 'This email address is already registered'
                         ]);
                     }
                 }
@@ -129,7 +129,7 @@
                 fclose($accounts);
                 
                 return $this->view('auth.register', [
-                    'message' => 'Đăng ký tài khoản thành công. Vui lòng đăng nhập theo các thông tin bạn vừa đăng ký'
+                    'message' => 'Successful account registration. Please log in with the information you just registered'
                 ]);
             } else {
                 unlink($avatar);
@@ -143,19 +143,19 @@
         {
             foreach ($user as $property) {
                 if (trim($property) == '') {
-                    return 'Vui lòng nhập đầy đủ thông tin';
+                    return 'Please enter full information';
                 }
             }
             if (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
-                return 'Địa chỉ email không hợp lệ';
+                return 'Email address is not valid';
             }
             if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}/", $user['password'])) {
-                return 'Mật khẩu không hợp lệ, mất khẩu từ 8 đến 20 ký tự chứa ít nhất 1 chữ hoa, 1 chữ thường và 1 ký tự';
+                return 'Invalid password, password between 8 and 20 characters. Password contains at least 1 uppercase letter, 1 lowercase letter and 1 character';
             }
             return 'validated';
         }
 
-        public function find($id)
+        public function update($id)
         {
             $_SESSION['avatar'] = $id;
             $result = '';
@@ -204,9 +204,21 @@
             }
         }
 
-        public function update($id)
+        public function find($id)
         {
-            
+            $account = '';
+            $accounts = fopen('account.db', 'r') or die('Unable to open file!');
+            while(!feof($accounts)) {
+                $record = fgets($accounts);
+                if (str_contains($record, 'email=' . $id . ';')) {
+                    $account = $record;
+                    break;
+                }
+            }            
+            fclose($accounts);
+
+            $user = explode(';', $account);
+            return $user[1] . ' ' . $user[2];
         }
 
         public function delete($id)

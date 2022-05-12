@@ -1,5 +1,5 @@
 <div class="header">
-    <h1>Danh sách hình ảnh mới nhất</h1>
+    <h1>Latest Posts</h1>
 </div>
 
 <div class="row">
@@ -15,11 +15,11 @@
                 echo '</div>';
             }
             echo '<div class="show--image" onclick="showModal(this)" id="' . $posts[$i]['id'] . '">';
-            echo '<img id="img-' . $posts[$i]['id'] . '" src="/'. $posts[$i]['src'] .'" alt="' . $posts[$i]['description'] . '" style="width:100%">';
+            echo '<img id="img-' . $posts[$i]['id'] . '" src="/'. $posts[$i]['src'] .'" data-time="'. $posts[$i]['created_at'] .'" data-email="'. $this->findUser($posts[$i]['email']) .'" alt="' . $posts[$i]['description'] . '" style="width:100%">';
             echo '</div>';
             if (isset($_SESSION['admin']) && $_SESSION['admin']) {
                 echo '<div class="d-flex justify-content-center">';
-                echo '<a href="/admin/delete/' .  $posts[$i]['id'] . '" class="btn btn-danger">Xóa ảnh</a>';
+                echo '<a href="/admin/delete/' .  $posts[$i]['id'] . '" class="btn btn-danger">Delete</a>';
                 echo '</div>';
             }
         }
@@ -29,6 +29,8 @@
         <span class="close">&times;</span>
         <img class="modal-content" id="img01">
         <div id="caption"></div>
+        <div id="user"></div>
+
     </div>
 </div>
 
@@ -40,10 +42,15 @@ function showModal(e) {
     var img = document.getElementById(`img-${e.id}`);
     var modalImg = document.getElementById("img01");
     var captionText = document.getElementById("caption");
+    var user = document.getElementById("user");
+
 
     modal.style.display = "block";
     modalImg.src = img.src;
     captionText.innerHTML = img.alt;
+    user.innerHTML = 'Posted: ' + img.getAttribute('data-time');
+    user.innerHTML += '- By: ' + img.getAttribute('data-user');
+
 }
 
 span.onclick = function() {
