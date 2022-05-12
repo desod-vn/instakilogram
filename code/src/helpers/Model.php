@@ -11,14 +11,35 @@
             return mysqli_query($this->connect(), $sql);
         }
 
-        public function all($table, $column = ['*'], $orderBy = 'asc', $limit = '', $whereRaw = '')
+        public function all($table, $column = ['*'], $orderBy = 'asc', $limit = '')
+        {
+            $column = implode(',', $column);
+
+            if($limit != 0)
+                $sql = "SELECT ${column} FROM ${table} ORDER BY id ${orderBy} LIMIT ${limit}";
+            else
+                $sql = "SELECT ${column} FROM ${table} ORDER BY id ${orderBy}";
+
+            $data = [];
+            
+            $query = $this->__query($sql);
+
+            while($row = mysqli_fetch_assoc($query))
+            {
+                array_push($data, $row);
+            }
+
+            return $data;
+        }
+
+        public function allWhere($table, $column = ['*'], $orderBy = 'asc', $limit = '', $whereRaw = '')
         {
             $column = implode(',', $column);
 
             if($limit != 0)
                 $sql = "SELECT ${column} FROM ${table}". (isset($whereRaw) ? " WHERE ${whereRaw} " : " ") . "ORDER BY id ${orderBy} LIMIT ${limit}";
             else
-                $sql = "SELECT ${column} FROM ${table}}". (isset($whereRaw) ? " WHERE ${whereRaw} " : " ") . "ORDER BY id ${orderBy}";
+                $sql = "SELECT ${column} FROM ${table}". (isset($whereRaw) ? " WHERE ${whereRaw} " : " ") . "ORDER BY id ${orderBy}";
 
             $data = [];
             

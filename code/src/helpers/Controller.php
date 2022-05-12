@@ -68,6 +68,11 @@
             die();
         }
 
+        public function backAdmin($path = '') {
+            header('Location: /admin/' . $path);
+            die();
+        }
+
         public function model($name)
         {
             $path = self::MODEL_FOLDER_NAME . "/" . $name . ".php";

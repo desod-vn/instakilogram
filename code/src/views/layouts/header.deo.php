@@ -30,6 +30,9 @@
             } else {
                 echo '<a href="/home/login" class="btn btn-outline-primary">LOGIN</a>';
             }
+            if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+                echo '<a href="/home/logout" class="btn btn-danger ms-5">END ADMIN</a>';
+            }
         ?>
     </div>
     </div>

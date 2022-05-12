@@ -8,7 +8,7 @@
             echo '<div class="alert alert-danger">' . $error . '</div>';
         }
     ?>
-        <form method="POST" action="/post/create/" enctype="multipart/form-data">
+        <form method="POST" action="/home/create/" enctype="multipart/form-data">
             <div class="card--black px-5 py-5">
                 <span class="circle"></span>
                 <h5 class="mt-3">Post a image</h5> 

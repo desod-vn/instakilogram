@@ -15,13 +15,12 @@
 
         public function getAllWhere($orderBy = "ASC", $limit = 0, $where = '')
         {
-            return $this->all($this->table, $this->select, $orderBy, $limit, $where);
+            return $this->allWhere($this->table, $this->select, $orderBy, $limit, $where);
         }
 
         public function getOne($id = 0)
         {
             return $this->one($this->table, $this->select, $id);
-
         }
 
         public function createOne($data = [])
