@@ -25,7 +25,7 @@
             if (isset($_SESSION['email'])) {
                 echo '<a href="/home/user" class="btn">';
                 echo '<img class="img--avatar" src="/' . $_SESSION['avatar'] .'" alt="" />';
-                echo '<span class="d-none d-md-inline">MY ACCOUNT</span>';
+                echo '<span class="d-none d-md-inline">'. str_replace('lastname=', '', $_SESSION['lastname']) . ' ' . str_replace('firstname=', '', $_SESSION['firstname']) .'</span>';
                 echo '</a>';
             } else {
                 echo '<a href="/home/login" class="btn btn-outline-primary">LOGIN</a>';
